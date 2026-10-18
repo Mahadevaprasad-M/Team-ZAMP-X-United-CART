@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — TeamZampXUnited Admin</title>
+
+    <meta name="description" content="TeamZampXUnited admin dashboard.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0f1115">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../admin-css/admin.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+
+    <!-- Page-specific styles: live activity feed -->
+    <style>
+        .admin-activity-feed {
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .admin-activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            transition: background .15s var(--ease);
+        }
+
+        .admin-activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .admin-activity-item:hover {
+            background: #fafbfc;
+        }
+
+        .admin-activity-item__icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            background: var(--bg);
+        }
+
+        .admin-activity-item__icon--ok {
+            background: var(--success-soft);
+        }
+
+        .admin-activity-item__icon--warn {
+            background: var(--warning-soft);
+        }
+
+        .admin-activity-item__icon--bad {
+            background: var(--danger-soft);
+        }
+
+        .admin-activity-item__icon--info {
+            background: var(--info-soft);
+        }
+
+        @media (max-width: 640px) {
+            .admin-activity-feed {
+                max-height: 320px;
+            }
+
+            .admin-activity-item {
+                padding: 10px 14px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+
+    <!-- Admin UI root — filled by admin-ui.js -->
+    <div id="adminRoot"></div>
+
+    <!-- Scripts — ORDER MATTERS: socket → api → auth → ui -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../admin-js/api.js"></script>
+    <script src="../admin-js/admin-auth.js"></script>
+    <script src="../admin-js/admin-ui.js"></script>
+
+    <script>
+        /* =========================================================
+           TeamZampXUnited Admin — Dashboard logic (inline, no external file)
+           ========================================================= */
+
+        (async function boot() {
+            'use strict';
+
+            // 1. Require admin login (redirects if not)
+            const user = await AdminAuth.require();
+            if (!user) return;
+
+            // 2. Mount the admin shell
+            AdminUI.mount({
+                activePage: 'dashboard',
+                title: 'Dashboard',
+                subtitle: 'Live overview of your store',
+                content: ''
+            });
+
+            const content = document.getElementById('adminContent');
+            if (!content) return;
+
+            // 3. Draw the static layout
+            content.innerHTML = renderShell(user);
+
+            // 4. Load data in parallel
+            fetchKpis();
+            fetchRecentOrders();
+            fetchLowStock();
+            openLiveFeed();
+            updateAlertsBadge();
+        })();
+
+
+        /* =========================================================
+           STATIC LAYOUT
+           ========================================================= */
+        function renderShell(user) {
+            const esc = AdminUI.escapeHtml;
+
+            // Time-based greeting
+            const hour = new Date().getHours();
+            const greeting =
+                hour < 12 ? 'Good morning' :
+                    hour < 17 ? 'Good afternoon' :
+                        'Good evening';
+
+            return `
+      <!-- Welcome card -->
+      <div class="admin-card admin-mb-3">
+        <div class="admin-card__body">
+          <div class="admin-flex-between admin-flex-wrap" style="gap:14px">
+            <div style="min-width:0">
+              <h2 style="font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:700">
+                ${greeting}, ${esc(user.name)} 👋
+              </h2>
+              <p class="admin-muted" style="font-size:.88rem;margin-top:4px">
+                Here's what's happening with your store today.
+              </p>
+            </div>
+            <div class="admin-flex" style="gap:8px;flex-wrap:wrap">
+              <a href="inventory.html" class="admin-btn admin-btn--outline admin-btn--sm">Manage inventory</a>
+              <a href="orders.html"    class="admin-btn admin-btn--primary admin-btn--sm">View orders</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI grid (loaded by fetchKpis) -->
+      <div class="admin-kpi-grid" id="kpiGrid">
+        ${AdminUI.kpiTile({ label: "Today's revenue", value: '<span class="admin-muted">—</span>', hint: 'Loading…' })}
+        ${AdminUI.kpiTile({ label: "Today's orders", value: '<span class="admin-muted">—</span>', hint: 'Loading…' })}
+        ${AdminUI.kpiTile({ label: 'Total products', value: '<span class="admin-muted">—</span>', hint: 'Loading…' })}
+        ${AdminUI.kpiTile({ label: 'Low-stock alerts', value: '<span class="admin-muted">—</span>', hint: 'Loading…' })}
+      </div>
+
+      <!-- Recent orders + Low stock -->
+      <div class="admin-row admin-row--2 admin-mb-3">
+        <section class="admin-card">
+          <div class="admin-card__head">
+            <div>
+              <h3 class="admin-card__title">Recent orders</h3>
+              <p class="admin-card__subtitle">Latest 5 orders across the store</p>
+            </div>
+            <a href="orders.html" class="admin-btn admin-btn--ghost admin-btn--sm">View all →</a>
+          </div>
+          <div class="admin-card__body admin-card__body--flush" id="recentOrdersHost">
+            ${skeleton(4)}
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card__head">
+            <div>
+              <h3 class="admin-card__title">Low-stock alerts</h3>
+              <p class="admin-card__subtitle">Products below their threshold</p>
+            </div>
+            <a href="alerts.html" class="admin-btn admin-btn--ghost admin-btn--sm">Manage →</a>
+          </div>
+          <div class="admin-card__body admin-card__body--flush" id="lowStockHost">
+            ${skeleton(3)}
+          </div>
+        </section>
+      </div>
+
+      <!-- Live activity feed -->
+      <section class="admin-card admin-mb-3">
+        <div class="admin-card__head">
+          <div>
+            <h3 class="admin-card__title">
+              Live activity
+              <span id="liveDot" title="Connecting…"
+                    style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d1d5db;margin-left:6px;vertical-align:middle"></span>
+            </h3>
+            <p class="admin-card__subtitle">Real-time updates as they happen</p>
+          </div>
+        </div>
+        <div class="admin-card__body admin-card__body--flush">
+          <div id="activityFeed" class="admin-activity-feed">
+            ${AdminUI.emptyState({
+                icon: '📡',
+                title: 'Listening for events…',
+                message: 'New orders, stock changes, and other activity will appear here in real time.'
+            })}
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick actions -->
+      <section class="admin-card">
+        <div class="admin-card__head">
+          <h3 class="admin-card__title">Quick actions</h3>
+        </div>
+        <div class="admin-card__body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+            ${quickAction('inventory.html', '📦', 'Manage inventory', 'Add, edit, adjust stock')}
+            ${quickAction('orders.html', '🧾', 'Process orders', 'Update status, print invoices')}
+            ${quickAction('alerts.html', '🔔', 'Review alerts', 'Restock low items')}
+            ${quickAction('analytics.html', '📈', 'View analytics', 'Reports & trends')}
+          </div>
+        </div>
+      </section>
+    `;
+        }
+
+        function quickAction(href, icon, title, subtitle) {
+            return `
+      <a href="${href}" class="admin-btn admin-btn--outline"
+         style="justify-content:flex-start;padding:14px 16px;height:auto">
+        <span>${icon}</span>
+        <span style="text-align:left;line-height:1.3">
+          <strong style="display:block">${title}</strong>
+          <span class="admin-muted" style="font-weight:400;font-size:.78rem">${subtitle}</span>
+        </span>
+      </a>
+    `;
+        }
+
+        function skeleton(rows) {
+            let out = '<div style="padding:16px">';
+
+            for (let i = 0; i < rows; i++) {
+                out += `<div style="height:36px;border-radius:6px;margin-bottom:10px;
+                background:linear-gradient(90deg,#f1f3f5 0%,#e9ecef 50%,#f1f3f5 100%);
+                background-size:200% 100%;
+                animation:adminShimmer 1.4s ease-in-out infinite"></div>`;
+            }
+
+            return out + '</div>';
+        }
+
+
+        /* =========================================================
+           KPIs
+           ========================================================= */
+        async function fetchKpis() {
+            const grid = document.getElementById('kpiGrid');
+            if (!grid) return;
+
+            let summary = null;
+            try {
+                const res = await API.analytics.summary();
+                summary = res && res.summary ? res.summary : res;
+            } catch (err) {
+                // Endpoint not ready yet — silent fail
+            }
+
+            if (!summary || typeof summary !== 'object') {
+                grid.innerHTML = emptyKpis();
+                return;
+            }
+
+            const today = summary.today || {};
+            const totals = summary.totals || {};
+
+            grid.innerHTML = [
+                AdminUI.kpiTile({
+                    label: "Today's revenue",
+                    value: AdminUI.money(today.revenue || 0),
+                    hint: today.revenueChange != null
+                        ? (today.revenueChange >= 0 ? '▲ ' : '▼ ') +
+                        Math.abs(today.revenueChange).toFixed(1) + '% vs yesterday'
+                        : 'Today so far'
+                }),
+                AdminUI.kpiTile({
+                    label: "Today's orders",
+                    value: String(today.orders || 0),
+                    hint: today.pending != null ? today.pending + ' pending' : 'Placed today'
+                }),
+                AdminUI.kpiTile({
+                    label: 'Total products',
+                    value: String(totals.products || 0),
+                    hint: totals.categories ? 'Across ' + totals.categories + ' categories' : 'In your catalogue'
+                }),
+                AdminUI.kpiTile({
+                    label: 'Low-stock alerts',
+                    value: String(totals.lowStock || 0),
+                    hint: totals.outOfStock
+                        ? totals.outOfStock + ' out of stock'
+                        : (totals.lowStock > 0 ? 'Needs restocking' : 'Everything looks healthy')
+                })
+            ].join('');
+        }
+
+        function emptyKpis() {
+            return [
+                AdminUI.kpiTile({ label: "Today's revenue", value: '<span class="admin-muted">₹0</span>', hint: 'Live analytics coming soon' }),
+                AdminUI.kpiTile({ label: "Today's orders", value: '<span class="admin-muted">0</span>', hint: 'Order tracking coming soon' }),
+                AdminUI.kpiTile({ label: 'Total products', value: '<span class="admin-muted">—</span>', hint: 'Inventory API coming soon' }),
+                AdminUI.kpiTile({ label: 'Low-stock alerts', value: '<span class="admin-muted">—</span>', hint: 'Alert rules coming soon' })
+            ].join('');
+        }
+
+
+        /* =========================================================
+           RECENT ORDERS
+           ========================================================= */
+        async function fetchRecentOrders() {
+            const host = document.getElementById('recentOrdersHost');
+            if (!host) return;
+
+            let orders = null;
+            try {
+                const res = await API.orders.list({ limit: 5 });
+                if (res && Array.isArray(res.orders)) orders = res.orders;
+            } catch (err) { /* ignore */ }
+
+            if (!orders) {
+                host.innerHTML = AdminUI.emptyState({
+                    icon: '🧾',
+                    title: 'Orders not connected yet',
+                    message: "The order API is coming soon. Your latest orders will appear here."
+                });
+                return;
+            }
+
+            if (orders.length === 0) {
+                host.innerHTML = AdminUI.emptyState({
+                    icon: '📭',
+                    title: 'No orders yet',
+                    message: 'When a customer places an order it will show up here instantly.'
+                });
+                return;
+            }
+
+            const rows = orders.slice(0, 5).map(o => `
+      <tr>
+        <td class="admin-td admin-td--strong">${AdminUI.escapeHtml(o.id || '—')}</td>
+        <td class="admin-td">${AdminUI.escapeHtml(o.customerName || o.customerEmail || '—')}</td>
+        <td class="admin-td admin-td--muted">${AdminUI.relativeTime(o.date)}</td>
+        <td class="admin-td admin-td--right admin-td--strong">${AdminUI.money(o.total || 0)}</td>
+        <td class="admin-td admin-td--center">${AdminUI.statusBadge(o.status || 'Processing')}</td>
+      </tr>
+    `).join('');
+
+            host.innerHTML = `
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              ${AdminUI.th('Order')}
+              ${AdminUI.th('Customer')}
+              ${AdminUI.th('Placed')}
+              ${AdminUI.th('Total', { align: 'right' })}
+              ${AdminUI.th('Status', { align: 'center' })}
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    `;
+        }
+
+
+        /* =========================================================
+           LOW STOCK
+      
+           IMPORTANT: /api/alerts/low-stock returns rows shaped by
+           toAlertRow() in server/routes/alerts.js:
+               { productId, name, brand, category, image,
+                 price, stock, threshold, status,
+                 suggestedRestock, severityRank }
+           — NOT the raw product shape. So we must read:
+               p.image     (not p.images[0])
+               p.threshold (not p.lowStockThreshold)
+           ========================================================= */
+        async function fetchLowStock() {
+            const host = document.getElementById('lowStockHost');
+            if (!host) return;
+
+            let items = null;
+            try {
+                const res = await API.alerts.lowStock();
+                if (res && Array.isArray(res.products)) items = res.products;
+            } catch (err) { /* ignore */ }
+
+            if (!items) {
+                host.innerHTML = AdminUI.emptyState({
+                    icon: '🔔',
+                    title: 'Alerts not connected yet',
+                    message: 'Once the alerts API is live, low-stock items will show here automatically.'
+                });
+                return;
+            }
+
+            if (items.length === 0) {
+                host.innerHTML = AdminUI.emptyState({
+                    icon: '✅',
+                    title: 'All stocked up',
+                    message: 'No products are below their low-stock threshold right now.'
+                });
+                return;
+            }
+
+            const esc = AdminUI.escapeHtml;
+
+            const rows = items.slice(0, 5).map(p => {
+                const out = p.stock === 0;
+                const tone = out ? 'bad' : 'warn';
+                const label = out ? 'Out of stock' : 'Low stock';
+
+                // Alerts endpoint returns `image`, not `images[0]`
+                const img = p.image || '';
+
+                // Alerts endpoint returns `threshold`, not `lowStockThreshold`
+                const threshold = Number.isFinite(+p.threshold) ? +p.threshold : 10;
+
+                return `
+        <div class="admin-activity-item">
+          <img src="${esc(img)}" alt="" class="admin-thumb"
+               style="width:36px;height:36px"
+               onerror="this.style.visibility='hidden'">
+          <div style="flex:1;min-width:0">
+            <div class="admin-truncate" style="font-weight:600;font-size:.88rem">
+              ${esc(p.name || '—')}
+            </div>
+            <div class="admin-muted" style="font-size:.76rem">
+              ${esc(String(p.stock))} left · threshold ${esc(String(threshold))}
+            </div>
+          </div>
+          <span class="admin-badge admin-badge--${tone}">${label}</span>
+        </div>
+      `;
+            }).join('');
+
+            host.innerHTML = '<div style="padding:8px 0">' + rows + '</div>';
+        }
+
+
+        /* =========================================================
+           ALERTS BADGE (sidebar)
+           ========================================================= */
+        async function updateAlertsBadge() {
+            try {
+                const res = await API.alerts.lowStock();
+                const list = (res && Array.isArray(res.products)) ? res.products : [];
+                const badge = document.querySelector('[data-nav-badge="alerts"]');
+                if (!badge) return;
+
+                badge.hidden = list.length === 0;
+                if (list.length) badge.textContent = String(list.length);
+            } catch (_) { /* silent */ }
+        }
+
+
+        /* =========================================================
+           LIVE ACTIVITY FEED (Socket.IO)
+           ========================================================= */
+        function openLiveFeed() {
+            const feed = document.getElementById('activityFeed');
+            const dot = document.getElementById('liveDot');
+            if (!feed) return;
+
+            if (typeof io !== 'function') {
+                feed.innerHTML = AdminUI.emptyState({
+                    icon: '📡',
+                    title: 'Live feed unavailable',
+                    message: 'Socket.IO client did not load.'
+                });
+                return;
+            }
+
+            const socket = io({
+                auth: { token: API.token.get() },
+                transports: ['websocket', 'polling']
+            });
+
+            const events = [];
+
+            socket.on('connect', () => {
+                if (dot) { dot.style.background = '#16a34a'; dot.title = 'Connected'; }
+                socket.emit('join:admin', API.token.get());
+            });
+
+            socket.on('disconnect', () => {
+                if (dot) { dot.style.background = '#d1d5db'; dot.title = 'Disconnected'; }
+            });
+
+            socket.on('activity:new', entry => {
+                if (!entry) return;
+                events.unshift(entry);
+                if (events.length > 30) events.length = 30;
+                renderFeed(events, feed);
+            });
+
+            socket.on('activity:cleared', () => {
+                events.length = 0;
+                renderFeed(events, feed);
+            });
+        }
+
+        function renderFeed(list, host) {
+            if (!list.length) return;
+
+            host.innerHTML = '<div style="padding:6px 0">' +
+                list.map(renderActivityItem).join('') +
+                '</div>';
+        }
+
+        function renderActivityItem(e) {
+            const esc = AdminUI.escapeHtml;
+
+            // Icon per event type
+            const icons = {
+                'order:new': '🛒',
+                'order:status': '📦',
+                'order:deleted': '🗑️',
+                'product:new': '🆕',
+                'product:updated': '✏️',
+                'product:deleted': '🗑️',
+                'stock:changed': '📊',
+                'stock:low': '⚠️',
+                'stock:out': '🚨',
+                'customer:new': '👤',
+                'admin:login': '🔐',
+                'settings:updated': '⚙️',
+                'password:changed': '🔑'
+            };
+            const icon = icons[e.type] || '•';
+
+            // Tone → colored icon background
+            const tone =
+                e.type === 'stock:out' ? 'bad' :
+                    e.type === 'stock:low' ? 'warn' :
+                        e.type === 'order:new' ? 'ok' :
+                            'info';
+
+            return `
+      <div class="admin-activity-item">
+        <div class="admin-activity-item__icon admin-activity-item__icon--${tone}">
+          ${icon}
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.88rem;font-weight:500;line-height:1.4">
+            ${esc(e.message || e.type || 'Event')}
+          </div>
+          <div class="admin-muted" style="font-size:.74rem;margin-top:2px">
+            ${esc(e.actor || 'system')} · ${AdminUI.relativeTime(e.date)}
+          </div>
+        </div>
+      </div>
+    `;
+        }
+
+
+        /* =========================================================
+           SHIMMER ANIMATION (inject once)
+           ========================================================= */
+        (function injectShimmer() {
+            if (document.getElementById('adminShimmerKf')) return;
+
+            const style = document.createElement('style');
+            style.id = 'adminShimmerKf';
+            style.textContent =
+                '@keyframes adminShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}';
+
+            document.head.appendChild(style);
+        })();
+    </script>
+
+</body>
+
+</html>

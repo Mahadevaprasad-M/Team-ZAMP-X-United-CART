@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Sign In — TeamZampXUnited</title>
+
+    <meta name="description" content="Administrator sign-in for TeamZampXUnited.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0f1115">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../admin-css/admin.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+
+    <!-- Login-page styles -->
+    <style>
+        .admin-banner {
+            display: block;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: .84rem;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            border: 1px solid transparent;
+        }
+
+        .admin-banner[hidden] {
+            display: none;
+        }
+
+        .admin-banner--info {
+            background: var(--info-soft);
+            color: #1e3a8a;
+            border-color: rgba(37, 99, 235, .25);
+        }
+
+        .admin-banner--ok {
+            background: var(--success-soft);
+            color: #065f46;
+            border-color: rgba(22, 163, 74, .25);
+        }
+
+        .admin-banner--warn {
+            background: var(--warning-soft);
+            color: #92400e;
+            border-color: rgba(217, 119, 6, .25);
+        }
+
+        .admin-banner--error {
+            background: var(--danger-soft);
+            color: #991b1b;
+            border-color: rgba(220, 38, 38, .25);
+        }
+
+        @media (max-width: 420px) {
+            .admin-login-card {
+                padding: 22px 16px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+
+    <!-- Login card -->
+    <div class="admin-login-wrap">
+        <div class="admin-login-card">
+
+            <!-- Brand -->
+            <div class="admin-login-brand">
+                <a href="../index.html">TeamZamp<span>X</span>United</a>
+                <small>Admin Panel</small>
+            </div>
+
+            <!-- Heading -->
+            <h1>Sign in to continue</h1>
+            <p>Administrator access only.</p>
+
+            <!-- Error/notice banner — filled by JS -->
+            <div id="loginBanner" class="admin-banner" role="alert" hidden></div>
+
+            <!-- Login form -->
+            <form id="adminLoginForm" class="admin-form" novalidate autocomplete="on">
+
+                <div class="admin-field">
+                    <label for="adminEmail">Email address <span class="req">*</span></label>
+                    <input type="email" id="adminEmail" name="email" autocomplete="username"
+                        placeholder="admin@TeamZampXUnited.in" required>
+                </div>
+
+                <div class="admin-field">
+                    <label for="adminPassword">Password <span class="req">*</span></label>
+
+                    <div style="position:relative">
+                        <input type="password" id="adminPassword" name="password" autocomplete="current-password"
+                            placeholder="Enter your password" required style="padding-right:5rem">
+
+                        <button type="button" id="togglePassword" aria-label="Show password" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                           font-size:.78rem;font-weight:600;color:var(--muted);
+                           padding:6px 8px;border-radius:6px">
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-flex-between" style="gap:8px;flex-wrap:wrap">
+                    <label class="admin-flex" style="gap:8px;cursor:pointer;font-size:.82rem;color:var(--muted)">
+                        <input type="checkbox" id="rememberEmail" style="accent-color:var(--fg);width:15px;height:15px">
+                        Remember my email
+                    </label>
+
+                    <a href="../index.html"
+                        style="font-size:.82rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px">
+                        ← Back to store
+                    </a>
+                </div>
+
+                <button type="submit" class="admin-btn admin-btn--primary" id="loginSubmit"
+                    style="width:100%;padding:12px 16px;font-size:.9rem">
+                    Sign in
+                </button>
+            </form>
+
+            <!-- Demo credentials — remove after changing the password -->
+            <div class="admin-login-help">
+                <strong style="color:var(--fg)">Demo credentials</strong><br>
+                Email: <code>admin@TeamZampXUnited.in</code><br>
+                Password: <code>admin123</code>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts — login page does NOT need admin-ui.js -->
+    <script src="../admin-js/api.js"></script>
+    <script src="../admin-js/admin-auth.js"></script>
+
+    <script>
+        /* =========================================================
+           TeamZampXUnited Admin — Login page logic
+           ========================================================= */
+        (function () {
+            'use strict';
+
+            /* ---- Element references ---- */
+            const form = document.getElementById('adminLoginForm');
+            const emailIn = document.getElementById('adminEmail');
+            const passIn = document.getElementById('adminPassword');
+            const submitBtn = document.getElementById('loginSubmit');
+            const banner = document.getElementById('loginBanner');
+            const toggleBtn = document.getElementById('togglePassword');
+            const remember = document.getElementById('rememberEmail');
+
+            /* ---- Constants ---- */
+            const REMEMBER_KEY = 'pxc_admin_last_email';
+            const FAILED_KEY = 'pxc_admin_failed_count';
+            const FAILED_MAX = 5;
+
+
+            /* ---- Banner helpers ---- */
+            function showBanner(kind, message) {
+                banner.className = 'admin-banner admin-banner--' + kind;
+                banner.textContent = message;
+                banner.hidden = false;
+            }
+
+            function hideBanner() {
+                banner.hidden = true;
+                banner.textContent = '';
+            }
+
+
+            /* ---- Field error helpers ---- */
+            function markError(input, message) {
+                const field = input.closest('.admin-field');
+                if (!field) return;
+
+                field.classList.add('admin-field--error');
+
+                // Remove any old error message
+                const prev = field.querySelector('.admin-field__error');
+                if (prev) prev.remove();
+
+                // Add new error message
+                const err = document.createElement('div');
+                err.className = 'admin-field__error';
+                err.textContent = message;
+                field.appendChild(err);
+                input.focus();
+
+                // Clear error on next input
+                input.addEventListener('input', function clear() {
+                    field.classList.remove('admin-field--error');
+                    const e = field.querySelector('.admin-field__error');
+                    if (e) e.remove();
+                    input.removeEventListener('input', clear);
+                });
+            }
+
+            function clearFieldErrors() {
+                document.querySelectorAll('.admin-field--error')
+                    .forEach(f => f.classList.remove('admin-field--error'));
+                document.querySelectorAll('.admin-field__error')
+                    .forEach(e => e.remove());
+            }
+
+
+            /* ---- Submit button loading state ---- */
+            function setLoading(isLoading) {
+                if (isLoading) {
+                    submitBtn.disabled = true;
+                    submitBtn.dataset.label = submitBtn.textContent;
+                    submitBtn.textContent = 'Signing in…';
+                    submitBtn.style.opacity = '.7';
+                    submitBtn.style.cursor = 'wait';
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = submitBtn.dataset.label || 'Sign in';
+                    submitBtn.style.opacity = '';
+                    submitBtn.style.cursor = '';
+                }
+            }
+
+
+            /* ---- Failed-attempt counter (soft rate-limit) ---- */
+            function getFailedCount() {
+                const n = parseInt(sessionStorage.getItem(FAILED_KEY) || '0', 10);
+                return Number.isFinite(n) ? n : 0;
+            }
+
+            function bumpFailedCount() {
+                const n = getFailedCount() + 1;
+                try { sessionStorage.setItem(FAILED_KEY, String(n)); } catch (_) { }
+                return n;
+            }
+
+            function resetFailedCount() {
+                try { sessionStorage.removeItem(FAILED_KEY); } catch (_) { }
+            }
+
+
+            /* ---- Remember-me ---- */
+            function prefillRemembered() {
+                try {
+                    const saved = localStorage.getItem(REMEMBER_KEY);
+                    if (saved) {
+                        emailIn.value = saved;
+                        remember.checked = true;
+                        setTimeout(() => passIn.focus(), 100);
+                    }
+                } catch (_) { }
+            }
+
+            function persistRemembered() {
+                try {
+                    if (remember.checked) {
+                        localStorage.setItem(REMEMBER_KEY, emailIn.value.trim());
+                    } else {
+                        localStorage.removeItem(REMEMBER_KEY);
+                    }
+                } catch (_) { }
+            }
+
+
+            /* ---- Password visibility toggle ---- */
+            toggleBtn.addEventListener('click', () => {
+                const isPwd = passIn.type === 'password';
+                passIn.type = isPwd ? 'text' : 'password';
+                toggleBtn.textContent = isPwd ? 'Hide' : 'Show';
+                toggleBtn.setAttribute('aria-label', isPwd ? 'Hide password' : 'Show password');
+            });
+
+
+            /* =========================================================
+               PAGE BOOT
+               ========================================================= */
+            (async function boot() {
+                // 1. Redirect if already logged in
+                const alreadyIn = await AdminAuth.redirectIfLoggedIn('index.html');
+                if (alreadyIn) return;
+
+                // 2. Show banner based on ?reason=... in the URL
+                const reason = new URLSearchParams(location.search).get('reason');
+
+                const messages = {
+                    'expired': ['warn', 'Your session expired. Please sign in again.'],
+                    'logout': ['info', 'You have been signed out.'],
+                    'login-required': ['info', 'Please sign in to access the admin panel.'],
+                    'not-admin': ['error', 'That account does not have administrator access.']
+                };
+
+                if (messages[reason]) {
+                    showBanner(...messages[reason]);
+                }
+
+                // 3. Prefill remembered email
+                prefillRemembered();
+
+                // 4. Focus the right field
+                if (!emailIn.value) emailIn.focus();
+            })();
+
+
+            /* =========================================================
+               SUBMIT HANDLER
+               ========================================================= */
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideBanner();
+                clearFieldErrors();
+
+                /* ---- 1. Client-side format checks ---- */
+                const email = emailIn.value.trim();
+                const pwd = passIn.value;
+
+                if (!email) {
+                    return markError(emailIn, 'Email address is required.');
+                }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    return markError(emailIn, 'Please enter a valid email address.');
+                }
+                if (!pwd) {
+                    return markError(passIn, 'Password is required.');
+                }
+
+                /* ---- 2. Soft rate-limit ---- */
+                if (getFailedCount() >= FAILED_MAX) {
+                    return showBanner('error',
+                        'Too many failed attempts in this session. ' +
+                        'Close this tab and open the login page again to retry.');
+                }
+
+                /* ---- 3. Try to log in ---- */
+                setLoading(true);
+
+                try {
+                    const res = await AdminAuth.login(email, pwd);
+
+                    if (!res.ok) {
+                        bumpFailedCount();
+
+                        const msg = res.error || 'Sign-in failed.';
+
+                        if (/email/i.test(msg) && /not found|no account/i.test(msg)) {
+                            markError(emailIn, msg);
+                            showBanner('error', 'We could not find an account with that email.');
+                        } else if (/incorrect|invalid/i.test(msg) && /password/i.test(msg)) {
+                            markError(passIn, msg);
+                            showBanner('error', 'Incorrect email or password.');
+                        } else {
+                            showBanner('error', msg);
+                        }
+
+                        setLoading(false);
+                        return;
+                    }
+
+                    /* ---- 4. Success — redirect to dashboard ---- */
+                    resetFailedCount();
+                    persistRemembered();
+
+                    showBanner('ok', 'Signed in. Redirecting…');
+                    submitBtn.textContent = 'Redirecting…';
+
+                    setTimeout(() => window.location.replace('index.html'), 350);
+
+                } catch (err) {
+                    console.error('[admin-login]', err);
+                    showBanner('error', 'Something went wrong. Please try again.');
+                    setLoading(false);
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{
+  "storeName": "TeamZampXUnited",
+  "currency": "INR",
+  "freeShippingThreshold": 499,
+  "shippingFee": 49,
+  "defaultLowStockThreshold": 10,
+  "taxPercent": 0,
+  "lowStockAlertsEnabled": true,
+  "updatedAt": "2026-10-09T16:42:39.980Z"
+}

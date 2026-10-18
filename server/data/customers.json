@@ -1,0 +1,34 @@
+[
+  {
+    "id": "u_mv1774bhtfud",
+    "name": "Store Admin",
+    "email": "admin@TeamZampXUnited.in",
+    "joined": "2026-10-09T16:46:58.206Z",
+    "orderCount": 0,
+    "totalSpent": 0,
+    "lastOrderAt": null,
+    "updatedAt": "2026-10-09T17:32:16.099Z"
+  },
+  {
+    "id": "u_mv18z0ctmxyg",
+    "name": "prasad",
+    "email": "prasad@gmail.com",
+    "hash": "$2a$10$NYc9VeLTwNwyxuNFOvkXEuLWuoS7tbmrGVafH45XFHqW8OprdJM4C",
+    "role": "customer",
+    "joined": "2026-10-09T17:36:39.053Z",
+    "orderCount": 2,
+    "totalSpent": 132399,
+    "lastOrderAt": "2026-10-10T08:42:50.532Z",
+    "updatedAt": "2026-10-10T08:42:50.547Z"
+  },
+  {
+    "id": "u_mv1aplcqxcg6",
+    "name": "demo",
+    "email": "demo@gmail.com",
+    "joined": "2026-10-09T18:25:18.938Z",
+    "orderCount": 0,
+    "totalSpent": 0,
+    "lastOrderAt": null,
+    "updatedAt": "2026-10-09T19:35:48.792Z"
+  }
+]

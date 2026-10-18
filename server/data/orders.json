@@ -1,0 +1,97 @@
+[
+  {
+    "id": "PXC-MV23EWFC-H0JV",
+    "customerId": "u_mv18z0ctmxyg",
+    "customerName": "prasad",
+    "customerEmail": "prasad@gmail.com",
+    "items": [
+      {
+        "productId": "p001",
+        "name": "Apple iPhone 15 Pro 256GB",
+        "brand": "Apple",
+        "image": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=900",
+        "qty": 1,
+        "price": 129900,
+        "cost": null
+      }
+    ],
+    "subtotal": 129900,
+    "shipping": 0,
+    "tax": 0,
+    "total": 129900,
+    "address": {
+      "name": "prasad",
+      "phone": "",
+      "line1": "Demo address (storefront checkout)",
+      "line2": "",
+      "city": "Demo City",
+      "state": "",
+      "pincode": ""
+    },
+    "payment": {
+      "method": "COD",
+      "status": "Paid"
+    },
+    "status": "Delivered",
+    "notes": "",
+    "date": "2026-10-10T07:48:48.936Z",
+    "updatedAt": "2026-10-10T08:03:30.715Z",
+    "statusHistory": [
+      {
+        "status": "Processing",
+        "date": "2026-10-10T07:48:48.936Z",
+        "by": "u_mv18z0ctmxyg"
+      },
+      {
+        "status": "Delivered",
+        "date": "2026-10-10T08:03:30.715Z",
+        "by": "u_mv1774bhtfud"
+      }
+    ]
+  },
+  {
+    "id": "PXC-MV25CDNO-OL20",
+    "customerId": "u_mv18z0ctmxyg",
+    "customerName": "prasad",
+    "customerEmail": "prasad@gmail.com",
+    "items": [
+      {
+        "productId": "p004",
+        "name": "Levi's 511 Slim Fit Jeans",
+        "brand": "Levi's",
+        "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=900",
+        "qty": 1,
+        "price": 2499,
+        "cost": null
+      }
+    ],
+    "subtotal": 2499,
+    "shipping": 0,
+    "tax": 0,
+    "total": 2499,
+    "address": {
+      "name": "prasad",
+      "phone": "",
+      "line1": "Demo address (storefront checkout)",
+      "line2": "",
+      "city": "Demo City",
+      "state": "",
+      "pincode": ""
+    },
+    "payment": {
+      "method": "COD",
+      "status": "Pending"
+    },
+    "status": "Processing",
+    "notes": "",
+    "date": "2026-10-10T08:42:50.532Z",
+    "updatedAt": "2026-10-10T08:42:50.532Z",
+    "statusHistory": [
+      {
+        "status": "Processing",
+        "date": "2026-10-10T08:42:50.532Z",
+        "by": "u_mv18z0ctmxyg"
+      }
+    ]
+  }
+]

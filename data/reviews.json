@@ -1,0 +1,66 @@
+{
+  "p001": [
+    {
+      "user": "Rahul S.",
+      "rating": 5,
+      "title": "Beast of a phone",
+      "text": "The titanium build feels premium and the camera is stunning in low light.",
+      "date": "2025-09-12"
+    },
+    {
+      "user": "Anita M.",
+      "rating": 4,
+      "title": "Worth the upgrade",
+      "text": "Coming from iPhone 12, the difference is huge. Battery could be better.",
+      "date": "2025-09-05"
+    },
+    {
+      "user": "Kiran P.",
+      "rating": 5,
+      "title": "Best iPhone yet",
+      "text": "Fast, smooth, and the Action button is surprisingly useful.",
+      "date": "2025-08-28"
+    }
+  ],
+  "p002": [
+    {
+      "user": "Deepak R.",
+      "rating": 5,
+      "title": "Silence at its best",
+      "text": "Best noise cancellation I've used on a flight. Sound is rich.",
+      "date": "2025-09-18"
+    },
+    {
+      "user": "Neha T.",
+      "rating": 5,
+      "title": "Premium feel",
+      "text": "Comfortable for long hours and the battery truly lasts 30h.",
+      "date": "2025-09-02"
+    }
+  ],
+  "p003": [
+    {
+      "user": "Arjun V.",
+      "rating": 5,
+      "title": "Daily runner's dream",
+      "text": "Super cushioned and light on the feet.",
+      "date": "2025-08-30"
+    }
+  ],
+  "p010": [
+    {
+      "user": "Priya K.",
+      "rating": 5,
+      "title": "Glowing skin!",
+      "text": "Visible glow in 2 weeks. Doesn't irritate my sensitive skin.",
+      "date": "2025-09-20"
+    },
+    {
+      "user": "Meera D.",
+      "rating": 4,
+      "title": "Nice texture",
+      "text": "Absorbs quickly, no stickiness. Slight citrus smell.",
+      "date": "2025-09-11"
+    }
+  ]
+}

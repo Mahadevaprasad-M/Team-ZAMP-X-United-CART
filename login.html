@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register — TeamZampXUnited</title>
+
+    <meta name="description" content="Log in or create your TeamZampXUnited account.">
+    <meta name="author" content="TeamZampXUnited">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body>
+
+    <!-- Header — filled by ui.js -->
+    <div id="site-header"></div>
+
+    <div class="auth-wrap">
+        <div class="auth-card">
+
+            <!-- Brand logo -->
+            <div style="text-align:center;margin-bottom:1.5rem">
+                <a href="index.html"
+                    style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.03em">
+                    TeamZamp<span style="color:#dc2626">X</span>United
+                </a>
+            </div>
+
+            <!-- Tab switcher: Login | Register -->
+            <div role="tablist" style="display:flex;border-bottom:1px solid var(--border);margin-bottom:1.5rem">
+
+                <a href="#login" data-auth-link="login" role="tab" aria-selected="true"
+                    style="flex:1;text-align:center;padding:.85rem;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--foreground);border-bottom:2px solid var(--foreground)">
+                    Login
+                </a>
+
+                <a href="#register" data-auth-link="register" role="tab" aria-selected="false"
+                    style="flex:1;text-align:center;padding:.85rem;font-size:.9rem;font-weight:600;text-decoration:none;color:var(--muted-foreground);border-bottom:2px solid transparent">
+                    Register
+                </a>
+
+            </div>
+
+            <!-- ================= LOGIN PANEL ================= -->
+            <div data-auth-tab="login" role="tabpanel" aria-label="Login">
+
+                <h1>Welcome back 👋</h1>
+                <p>Log in to continue shopping on TeamZampXUnited.</p>
+
+                <form id="loginForm" autocomplete="on" novalidate>
+
+                    <div class="form-group">
+                        <label for="loginEmail">Email address</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="you@example.com"
+                            autocomplete="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+
+                        <div style="position:relative">
+                            <input type="password" id="loginPassword" name="password" placeholder="Enter your password"
+                                autocomplete="current-password" required style="padding-right:4.5rem">
+
+                            <button type="button" data-toggle-password="loginPassword" aria-label="Show password"
+                                style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);font-size:.78rem;color:var(--muted-foreground);font-weight:600">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember me + Forgot password -->
+                    <div
+                        style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem;margin-bottom:1.25rem;gap:.5rem;flex-wrap:wrap">
+
+                        <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer">
+                            <input type="checkbox" name="remember" style="accent-color:#0a0a0a">
+                            Remember me
+                        </label>
+
+                        <a href="coming-soon.html?page=forgot-password"
+                            style="color:var(--muted-foreground);text-decoration:underline;text-underline-offset:3px">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+
+                <p class="auth-switch">
+                    New to TeamZampXUnited?
+                    <a href="#register" data-auth-link="register">Create an account</a>
+                </p>
+
+            </div>
+
+            <!-- ================= REGISTER PANEL ================= -->
+            <div data-auth-tab="register" role="tabpanel" aria-label="Register" style="display:none">
+
+                <h1>Create your account ✨</h1>
+                <p>Join TeamZampXUnited for exclusive deals &amp; fast checkout.</p>
+
+                <form id="registerForm" autocomplete="on" novalidate>
+
+                    <div class="form-group">
+                        <label for="registerName">Full name</label>
+                        <input type="text" id="registerName" name="name" placeholder="Your Name" autocomplete="name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email address</label>
+                        <input type="email" id="registerEmail" name="email" placeholder="you@example.com"
+                            autocomplete="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+
+                        <div style="position:relative">
+                            <input type="password" id="registerPassword" name="password"
+                                placeholder="At least 6 characters" autocomplete="new-password" required
+                                style="padding-right:4.5rem">
+
+                            <button type="button" data-toggle-password="registerPassword" aria-label="Show password"
+                                style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);font-size:.78rem;color:var(--muted-foreground);font-weight:600">
+                                Show
+                            </button>
+                        </div>
+
+                        <!-- Password strength meter — filled by auth.js -->
+                        <div id="pwdStrength" aria-live="polite"
+                            style="font-size:.78rem;margin-top:.35rem;font-weight:600"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerConfirm">Confirm password</label>
+
+                        <div style="position:relative">
+                            <input type="password" id="registerConfirm" name="confirm"
+                                placeholder="Re-enter your password" autocomplete="new-password" required
+                                style="padding-right:4.5rem">
+
+                            <button type="button" data-toggle-password="registerConfirm" aria-label="Show password"
+                                style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);font-size:.78rem;color:var(--muted-foreground);font-weight:600">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terms checkbox -->
+                    <label
+                        style="display:flex;align-items:flex-start;gap:.5rem;font-size:.82rem;color:var(--muted-foreground);margin-bottom:1.25rem;cursor:pointer">
+                        <input type="checkbox" name="terms" style="margin-top:.2rem;accent-color:#0a0a0a" required>
+                        <span>
+                            I agree to TeamZampXUnited's
+                            <a href="terms.html"
+                                style="color:var(--foreground);text-decoration:underline;text-underline-offset:3px">Terms</a>
+                            &amp;
+                            <a href="privacy.html"
+                                style="color:var(--foreground);text-decoration:underline;text-underline-offset:3px">Privacy
+                                Policy</a>.
+                        </span>
+                    </label>
+
+                    <button type="submit" class="btn btn-primary btn-block">Create account</button>
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="#login" data-auth-link="login">Log in instead</a>
+                </p>
+
+            </div>
+
+            <!-- Trust strip -->
+            <div
+                style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-around;font-size:.72rem;color:var(--muted-foreground);text-align:center;gap:.5rem">
+
+                <div>
+                    <div style="font-size:1.1rem">🔒</div>
+                    Secure<br>checkout
+                </div>
+
+                <div>
+                    <div style="font-size:1.1rem">🚚</div>
+                    Free<br>shipping
+                </div>
+
+                <div>
+                    <div style="font-size:1.1rem">↩️</div>
+                    7-day<br>returns
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer — filled by ui.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast host -->
+    <div id="toastHost" class="toast-host"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

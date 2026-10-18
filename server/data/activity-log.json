@@ -1,0 +1,498 @@
+[
+  {
+    "id": "evt_mvds7p7hsfdo",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-18T12:08:31.325Z"
+  },
+  {
+    "id": "evt_mv2gfnkx9quf",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-10T13:53:19.137Z"
+  },
+  {
+    "id": "evt_mv25cu4yqyqu",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-10T08:43:11.890Z"
+  },
+  {
+    "id": "evt_mv25cdpmmgih",
+    "type": "stock:changed",
+    "message": "Stock -1 → Levi's 511 Slim Fit Jeans (119 left)",
+    "meta": {
+      "productId": "p004",
+      "name": "Levi's 511 Slim Fit Jeans",
+      "delta": -1,
+      "newStock": 119
+    },
+    "actor": "admin",
+    "date": "2026-10-10T08:42:50.602Z"
+  },
+  {
+    "id": "evt_mv25cdpm8qhp",
+    "type": "order:new",
+    "message": "New order PXC-MV25CDNO-OL20 — ₹2,499",
+    "meta": {
+      "orderId": "PXC-MV25CDNO-OL20",
+      "customerId": "u_mv18z0ctmxyg",
+      "customerName": "prasad",
+      "total": 2499,
+      "itemCount": 1
+    },
+    "actor": "customer:u_mv18z0ctmxyg",
+    "date": "2026-10-10T08:42:50.602Z"
+  },
+  {
+    "id": "evt_mv24uw0prn51",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-10T08:29:14.521Z"
+  },
+  {
+    "id": "evt_mv2430lltcdd",
+    "type": "review:new",
+    "message": "prasad reviewed a product (3★)",
+    "meta": {
+      "productId": "p018",
+      "userId": "u_mv18z0ctmxyg",
+      "rating": 3
+    },
+    "actor": "customer:u_mv18z0ctmxyg",
+    "date": "2026-10-10T08:07:34.090Z"
+  },
+  {
+    "id": "evt_mv23ye6v2xrw",
+    "type": "stock:changed",
+    "message": "Stock +7 → Minimalist Wooden Coffee Table (22 left)",
+    "meta": {
+      "productId": "p008",
+      "name": "Minimalist Wooden Coffee Table",
+      "delta": 7,
+      "newStock": 22
+    },
+    "actor": "admin",
+    "date": "2026-10-10T08:03:58.423Z"
+  },
+  {
+    "id": "evt_mv23xstd35dj",
+    "type": "order:status",
+    "message": "Order PXC-MV23EWFC-H0JV → Delivered",
+    "meta": {
+      "orderId": "PXC-MV23EWFC-H0JV",
+      "previousStatus": "Processing",
+      "newStatus": "Delivered"
+    },
+    "actor": "admin",
+    "date": "2026-10-10T08:03:30.721Z"
+  },
+  {
+    "id": "evt_mv23x1266j9k",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-10T08:02:54.750Z"
+  },
+  {
+    "id": "evt_mv23ewiuzgn8",
+    "type": "stock:changed",
+    "message": "Stock -1 → Apple iPhone 15 Pro 256GB (24 left)",
+    "meta": {
+      "productId": "p001",
+      "name": "Apple iPhone 15 Pro 256GB",
+      "delta": -1,
+      "newStock": 24
+    },
+    "actor": "admin",
+    "date": "2026-10-10T07:48:49.062Z"
+  },
+  {
+    "id": "evt_mv23ewiu0pf7",
+    "type": "order:new",
+    "message": "New order PXC-MV23EWFC-H0JV — ₹1,29,900",
+    "meta": {
+      "orderId": "PXC-MV23EWFC-H0JV",
+      "customerId": "u_mv18z0ctmxyg",
+      "customerName": "prasad",
+      "total": 129900,
+      "itemCount": 1
+    },
+    "actor": "customer:u_mv18z0ctmxyg",
+    "date": "2026-10-10T07:48:49.062Z"
+  },
+  {
+    "id": "evt_mv1d894rh7pa",
+    "type": "order:deleted",
+    "message": "Order PXC-MV1APYFH-X8KD deleted",
+    "meta": {
+      "orderId": "PXC-MV1APYFH-X8KD",
+      "total": 1099
+    },
+    "actor": "admin",
+    "date": "2026-10-09T19:35:48.795Z"
+  },
+  {
+    "id": "evt_mv1d894h08vv",
+    "type": "stock:changed",
+    "message": "Stock +1 → Apple MacBook Air M2 (36 left)",
+    "meta": {
+      "productId": "p013",
+      "name": "Apple MacBook Air M2",
+      "delta": 1,
+      "newStock": 36
+    },
+    "actor": "admin",
+    "date": "2026-10-09T19:35:48.785Z"
+  },
+  {
+    "id": "evt_mv1d863z1z93",
+    "type": "order:deleted",
+    "message": "Order PXC-MV1BKTLD-YLGE deleted",
+    "meta": {
+      "orderId": "PXC-MV1BKTLD-YLGE",
+      "total": 1099
+    },
+    "actor": "admin",
+    "date": "2026-10-09T19:35:44.879Z"
+  },
+  {
+    "id": "evt_mv1d863qahda",
+    "type": "stock:changed",
+    "message": "Stock +1 → Apple MacBook Air M2 (35 left)",
+    "meta": {
+      "productId": "p013",
+      "name": "Apple MacBook Air M2",
+      "delta": 1,
+      "newStock": 35
+    },
+    "actor": "admin",
+    "date": "2026-10-09T19:35:44.870Z"
+  },
+  {
+    "id": "evt_mv1blidcfd5k",
+    "type": "order:status",
+    "message": "Order PXC-MV1BKTLD-YLGE → Delivered",
+    "meta": {
+      "orderId": "PXC-MV1BKTLD-YLGE",
+      "previousStatus": "Shipped",
+      "newStatus": "Delivered"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T18:50:08.065Z"
+  },
+  {
+    "id": "evt_mv1bl4pumago",
+    "type": "order:status",
+    "message": "Order PXC-MV1BKTLD-YLGE → Shipped",
+    "meta": {
+      "orderId": "PXC-MV1BKTLD-YLGE",
+      "previousStatus": "Processing",
+      "newStatus": "Shipped"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T18:49:50.370Z"
+  },
+  {
+    "id": "evt_mv1bktmxn920",
+    "type": "stock:changed",
+    "message": "Stock -1 → Apple MacBook Air M2 (34 left)",
+    "meta": {
+      "productId": "p013",
+      "name": "Apple MacBook Air M2",
+      "delta": -1,
+      "newStock": 34
+    },
+    "actor": "admin",
+    "date": "2026-10-09T18:49:36.009Z"
+  },
+  {
+    "id": "evt_mv1bktmxj7yv",
+    "type": "order:new",
+    "message": "New order PXC-MV1BKTLD-YLGE — ₹1,099",
+    "meta": {
+      "orderId": "PXC-MV1BKTLD-YLGE",
+      "customerId": "u_mv1aplcqxcg6",
+      "customerName": "demo",
+      "total": 1099,
+      "itemCount": 1
+    },
+    "actor": "customer:u_mv1aplcqxcg6",
+    "date": "2026-10-09T18:49:36.009Z"
+  },
+  {
+    "id": "evt_mv1artsz635g",
+    "type": "order:status",
+    "message": "Order PXC-MV1APYFH-X8KD → Delivered",
+    "meta": {
+      "orderId": "PXC-MV1APYFH-X8KD",
+      "previousStatus": "Processing",
+      "newStatus": "Delivered"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T18:27:03.203Z"
+  },
+  {
+    "id": "evt_mv1apyi9vi19",
+    "type": "stock:changed",
+    "message": "Stock -1 → Apple MacBook Air M2 (34 left)",
+    "meta": {
+      "productId": "p013",
+      "name": "Apple MacBook Air M2",
+      "delta": -1,
+      "newStock": 34
+    },
+    "actor": "admin",
+    "date": "2026-10-09T18:25:35.985Z"
+  },
+  {
+    "id": "evt_mv1apyi8a7p2",
+    "type": "order:new",
+    "message": "New order PXC-MV1APYFH-X8KD — ₹1,099",
+    "meta": {
+      "orderId": "PXC-MV1APYFH-X8KD",
+      "customerId": "u_mv1aplcqxcg6",
+      "customerName": "demo",
+      "total": 1099,
+      "itemCount": 1
+    },
+    "actor": "customer:u_mv1aplcqxcg6",
+    "date": "2026-10-09T18:25:35.985Z"
+  },
+  {
+    "id": "evt_mv1aplcu0l4n",
+    "type": "customer:new",
+    "message": "New customer: demo",
+    "meta": {
+      "userId": "u_mv1aplcqxcg6",
+      "email": "demo@gmail.com"
+    },
+    "actor": "system",
+    "date": "2026-10-09T18:25:18.942Z"
+  },
+  {
+    "id": "evt_mv1anw0faeyn",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-09T18:23:59.439Z"
+  },
+  {
+    "id": "evt_mv1a4vl42vye",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-09T18:09:12.424Z"
+  },
+  {
+    "id": "evt_mv19iujc7dt5",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-09T17:52:04.632Z"
+  },
+  {
+    "id": "evt_mv19f96p3qon",
+    "type": "product:updated",
+    "message": "Product updated: Adidas Ultraboost Light",
+    "meta": {
+      "productId": "p020",
+      "action": "updated"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:49:16.993Z"
+  },
+  {
+    "id": "evt_mv19684o41s2",
+    "type": "stock:changed",
+    "message": "Stock -10 → Apple iPhone 15 Pro 256GB (15 left)",
+    "meta": {
+      "productId": "p001",
+      "name": "Apple iPhone 15 Pro 256GB",
+      "delta": -10,
+      "newStock": 15
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:42:15.721Z"
+  },
+  {
+    "id": "evt_mv19684obo53",
+    "type": "product:updated",
+    "message": "Product updated: Apple iPhone 15 Pro 256GB",
+    "meta": {
+      "productId": "p001",
+      "action": "updated"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:42:15.720Z"
+  },
+  {
+    "id": "evt_mv1934kk8inc",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-09T17:39:51.140Z"
+  },
+  {
+    "id": "evt_mv18z0cycqu0",
+    "type": "customer:new",
+    "message": "New customer: prasad",
+    "meta": {
+      "userId": "u_mv18z0ctmxyg",
+      "email": "prasad@gmail.com"
+    },
+    "actor": "system",
+    "date": "2026-10-09T17:36:39.058Z"
+  },
+  {
+    "id": "evt_mv18yc4rko6k",
+    "type": "admin:login",
+    "message": "Admin signed in: Store Admin",
+    "meta": {
+      "userId": "u_mv1774bhtfud"
+    },
+    "actor": "admin:u_mv1774bhtfud",
+    "date": "2026-10-09T17:36:07.659Z"
+  },
+  {
+    "id": "evt_mv18tdgrxkfm",
+    "type": "order:deleted",
+    "message": "Order PXC-MV18L7ML-5I43 deleted",
+    "meta": {
+      "orderId": "PXC-MV18L7ML-5I43",
+      "total": 20647
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:32:16.107Z"
+  },
+  {
+    "id": "evt_mv18tdfpj43i",
+    "type": "stock:changed",
+    "message": "Stock +1 → Organic Basmati Rice 5kg (200 left)",
+    "meta": {
+      "productId": "p006",
+      "name": "Organic Basmati Rice 5kg",
+      "delta": 1,
+      "newStock": 200
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:32:16.069Z"
+  },
+  {
+    "id": "evt_mv18tdfollkm",
+    "type": "stock:changed",
+    "message": "Stock +2 → Nike Air Zoom Pegasus 40 (60 left)",
+    "meta": {
+      "productId": "p003",
+      "name": "Nike Air Zoom Pegasus 40",
+      "delta": 2,
+      "newStock": 60
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:32:16.069Z"
+  },
+  {
+    "id": "evt_mv18l7nxpehw",
+    "type": "stock:changed",
+    "message": "Stock -1 → Organic Basmati Rice 5kg (199 left)",
+    "meta": {
+      "productId": "p006",
+      "name": "Organic Basmati Rice 5kg",
+      "delta": -1,
+      "newStock": 199
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:25:55.341Z"
+  },
+  {
+    "id": "evt_mv18l7nx4omd",
+    "type": "stock:changed",
+    "message": "Stock -2 → Nike Air Zoom Pegasus 40 (58 left)",
+    "meta": {
+      "productId": "p003",
+      "name": "Nike Air Zoom Pegasus 40",
+      "delta": -2,
+      "newStock": 58
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:25:55.341Z"
+  },
+  {
+    "id": "evt_mv18l7nw6j2a",
+    "type": "order:new",
+    "message": "New order PXC-MV18L7ML-5I43 — ₹20,647",
+    "meta": {
+      "orderId": "PXC-MV18L7ML-5I43",
+      "customerId": "u_mv1774bhtfud",
+      "customerName": "Store Admin",
+      "total": 20647,
+      "itemCount": 3
+    },
+    "actor": "customer:u_mv1774bhtfud",
+    "date": "2026-10-09T17:25:55.340Z"
+  },
+  {
+    "id": "evt_mv18iweuzvkp",
+    "type": "product:updated",
+    "message": "Product updated: Apple iPhone 15 Pro 256GB",
+    "meta": {
+      "productId": "p001",
+      "action": "updated"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:24:07.446Z"
+  },
+  {
+    "id": "evt_mv18ciq9080x",
+    "type": "product:updated",
+    "message": "Product updated: Apple iPhone 15 Pro 256GB",
+    "meta": {
+      "productId": "p001",
+      "action": "updated"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:19:09.777Z"
+  },
+  {
+    "id": "evt_mv184aqw58y4",
+    "type": "product:updated",
+    "message": "Product updated: Apple iPhone 15 Pro 256GB",
+    "meta": {
+      "productId": "p001",
+      "action": "updated"
+    },
+    "actor": "admin",
+    "date": "2026-10-09T17:12:46.184Z"
+  }
+]

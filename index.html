@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamZampXUnited — Shop Smart, Live Better</title>
+
+    <meta name="description"
+        content="TeamZampXUnited — India's modern online shopping destination for electronics, fashion, groceries, home, beauty & sports.">
+    <meta name="author" content="TeamZampXUnited">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Open Graph (for link previews) -->
+    <meta property="og:title" content="TeamZampXUnited — Shop Smart, Live Better">
+    <meta property="og:description" content="India's modern online shopping destination.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body>
+
+    <!-- Header + mobile menu — filled by ui.js -->
+    <div id="site-header"></div>
+
+    <main>
+
+        <!-- Hero slider + side cards. home.js fills this in; first slide is hardcoded so something shows before JS runs. -->
+        <section class="hero-wrap">
+            <div class="container">
+                <div class="hero-grid">
+
+                    <!-- Hero slider -->
+                    <div class="hero-slider" id="heroSlider" aria-label="Featured promotions">
+                        <div class="hero-slide active"
+                            style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1600')">
+                            <div class="hero-slide-content">
+                                <span class="hero-badge">Welcome</span>
+                                <h2>TeamZampXUnited</h2>
+                                <p>Shop smart, live better.</p>
+                                <a href="products.html" class="btn btn-light">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side offer cards — filled by home.js -->
+                    <aside class="hero-side" id="heroSide" aria-label="Featured offers"></aside>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Shop by Category — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title">
+                        Shop by <span class="grad-text">Category</span>
+                    </h2>
+                    <a href="products.html" class="link-more">View all →</a>
+                </div>
+                <div class="cat-strip" id="catStrip"></div>
+            </div>
+        </section>
+
+        <!-- Deals of the Day + countdown — filled by home.js -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <div class="flex-head">
+                        <h2 class="section-title">⚡ Deals of the Day</h2>
+
+                        <!-- Countdown timer -->
+                        <div class="countdown" id="dealTimer" aria-label="Time remaining">
+                            <span class="cd-box" id="cdH">00</span>
+                            <span class="cd-sep">:</span>
+                            <span class="cd-box" id="cdM">00</span>
+                            <span class="cd-sep">:</span>
+                            <span class="cd-box" id="cdS">00</span>
+                        </div>
+                    </div>
+                    <a href="products.html?sort=discount" class="link-more">All deals →</a>
+                </div>
+                <div class="product-grid" id="dealGrid"></div>
+            </div>
+        </section>
+
+        <!-- Two ad banners — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div class="ad-duo" id="adDuo"></div>
+            </div>
+        </section>
+
+        <!-- Featured Picks — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title">
+                        ✨ Featured <span class="grad-text">Picks</span>
+                    </h2>
+                    <a href="products.html?tag=featured" class="link-more">Explore →</a>
+                </div>
+                <div class="product-grid" id="featuredGrid"></div>
+            </div>
+        </section>
+
+        <!-- Full-width offer banner — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div class="offer-banner" id="offerBanner"></div>
+            </div>
+        </section>
+
+        <!-- Trending (top rated) — filled by home.js -->
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-head">
+                    <h2 class="section-title">
+                        🔥 Trending on <span class="grad-text">TeamZampXUnited</span>
+                    </h2>
+                    <a href="products.html?sort=rating" class="link-more">Top rated →</a>
+                </div>
+                <div class="product-grid" id="trendGrid"></div>
+            </div>
+        </section>
+
+        <!-- Brand strip (marquee) — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div class="brand-strip" id="brandStrip"></div>
+            </div>
+        </section>
+
+        <!-- USP row (marquee) — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div class="usp-row" id="uspRow"></div>
+            </div>
+        </section>
+
+        <!-- Newsletter — filled by home.js -->
+        <section class="section">
+            <div class="container">
+                <div id="newsletterBox"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer — filled by ui.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast host -->
+    <div id="toastHost" class="toast-host"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/home.js"></script>
+
+</body>
+
+</html>

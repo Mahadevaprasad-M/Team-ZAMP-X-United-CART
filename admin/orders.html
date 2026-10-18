@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders — TeamZampXUnited Admin</title>
+
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0f1115">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="../admin-css/admin.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body class="admin-body">
+
+    <!-- Admin UI root — filled by admin-ui.js -->
+    <div id="adminRoot"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../admin-js/api.js"></script>
+    <script src="../admin-js/admin-auth.js"></script>
+    <script src="../admin-js/admin-ui.js"></script>
+    <script src="../admin-js/admin-orders.js"></script>
+
+</body>
+
+</html>

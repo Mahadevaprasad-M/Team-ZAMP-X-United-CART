@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop All Products — TeamZampXUnited</title>
+
+    <meta name="description" content="Browse electronics, fashion, groceries, home, beauty and sports at TeamZampXUnited.">
+    <meta name="author" content="TeamZampXUnited">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body>
+
+    <!-- Header — filled by ui.js -->
+    <div id="site-header"></div>
+
+    <div class="page">
+
+        <!-- Page title + description -->
+        <header class="page-header">
+            <div class="container">
+                <h1 id="pageTitle">All Products</h1>
+                <p id="pageDesc">Loading products…</p>
+            </div>
+        </header>
+
+        <!-- Filters (left) + products (right) -->
+        <section class="container">
+            <div class="products-layout">
+
+                <!-- Filter sidebar -->
+                <aside class="filters" id="filtersPanel" aria-label="Product filters">
+
+                    <div class="filter-group">
+                        <h3>Category</h3>
+                        <div class="filter-options" id="filterCategories"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Brand</h3>
+                        <div class="filter-options" id="filterBrands"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Price</h3>
+                        <div class="filter-options" id="filterPrice"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h3>Customer Rating</h3>
+                        <div class="filter-options" id="filterRating"></div>
+                    </div>
+
+                    <button type="button" class="btn btn-outline btn-block btn-sm" id="clearFilters">
+                        Clear all filters
+                    </button>
+
+                </aside>
+
+                <!-- Toolbar + grid + pagination -->
+                <div class="products-main">
+
+                    <!-- Toolbar -->
+                    <div class="products-toolbar">
+
+                        <!-- Live count of products shown -->
+                        <div class="products-count" id="productsCount" aria-live="polite">
+                            Loading…
+                        </div>
+
+                        <div class="toolbar-actions">
+
+                            <!-- Mobile-only filters button (badge injected by JS) -->
+                            <button type="button" class="btn btn-outline btn-sm filter-toggle-btn" id="filterToggle"
+                                aria-label="Open filters">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                                </svg>
+                                Filters
+                            </button>
+
+                            <label for="sortSelect" style="font-size:.85rem;color:var(--muted-foreground)">
+                                Sort by
+                            </label>
+
+                            <select id="sortSelect" aria-label="Sort products">
+                                <option value="featured">Featured</option>
+                                <option value="new">Newest</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="rating">Customer Rating</option>
+                                <option value="discount">Discount</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <!-- Product grid — filled by products.js -->
+                    <div class="product-grid" id="productsGrid">
+                        <div class="empty-state" style="grid-column:1/-1">
+                            <div class="pxc-page-loader__spinner"
+                                style="margin:0 auto 1rem;border-color:rgba(0,0,0,.08);border-top-color:#0a0a0a"></div>
+                            <h3>Loading products…</h3>
+                            <p>Please wait a moment.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination — filled by products.js -->
+                    <div id="pagination"
+                        style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;padding:2rem 0 1rem"
+                        aria-label="Product pages"></div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer — filled by ui.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast host -->
+    <div id="toastHost" class="toast-host"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/products.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — TeamZampXUnited</title>
+
+    <meta name="description" content="View product details on TeamZampXUnited.">
+    <meta name="author" content="TeamZampXUnited">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body>
+
+    <!-- Header — filled by ui.js -->
+    <div id="site-header"></div>
+
+    <div class="page">
+        <div class="container">
+
+            <!-- Product content — filled by product.js.
+           Reads product id from ?id=, hash, path, or sessionStorage. -->
+            <div id="productRoot">
+
+                <!-- Loading screen -->
+                <div class="empty-state" style="padding:5rem 1rem">
+                    <div class="pxc-page-loader__spinner"
+                        style="margin:0 auto 1rem;border-color:rgba(0,0,0,.08);border-top-color:#0a0a0a"></div>
+                    <h3>Loading product…</h3>
+                    <p>Fetching details, please wait.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer — filled by ui.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast host -->
+    <div id="toastHost" class="toast-host"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/product.js"></script>
+
+</body>
+
+</html>

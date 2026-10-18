@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart — TeamZampXUnited</title>
+
+    <meta name="description" content="Review items in your TeamZampXUnited cart before checkout.">
+    <meta name="author" content="TeamZampXUnited">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body>
+
+    <!-- Header — filled by ui.js -->
+    <div id="site-header"></div>
+
+    <div class="page">
+
+        <!-- Page title + item count -->
+        <header class="page-header">
+            <div class="container">
+                <h1>Your Cart</h1>
+                <p id="cartItemCount" aria-live="polite">Loading your items…</p>
+            </div>
+        </header>
+
+        <!-- Cart layout: items + summary -->
+        <section class="container">
+            <div class="cart-layout">
+
+                <!-- Cart items — filled by cart.js -->
+                <div class="cart-list" id="cartList">
+                    <div class="empty-state" style="padding:3rem 1rem">
+                        <div class="pxc-page-loader__spinner"
+                            style="margin:0 auto 1rem;border-color:rgba(0,0,0,.08);border-top-color:#0a0a0a"></div>
+                        <h3>Loading your cart…</h3>
+                        <p>Please wait a moment.</p>
+                    </div>
+                </div>
+
+                <!-- Order summary — hidden until cart has items -->
+                <aside class="cart-summary-box" id="cartSummary" style="display:none" aria-label="Order summary">
+                </aside>
+
+            </div>
+            <!-- END cart-layout -->
+
+            <!-- Continue shopping link -->
+            <div style="padding:0 0 3rem;text-align:center">
+                <a href="products.html" data-no-loader
+                    style="font-size:.88rem;color:var(--muted-foreground);text-decoration:underline;text-underline-offset:3px">
+                    ← Continue shopping
+                </a>
+            </div>
+
+            <!-- Recommendations — filled by cart.js -->
+            <div id="cartRecommendations"></div>
+
+        </section>
+
+    </div>
+    <!-- END page -->
+
+    <!-- Footer — filled by ui.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast host -->
+    <div id="toastHost" class="toast-host"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/cart.js"></script>
+
+</body>
+
+</html>

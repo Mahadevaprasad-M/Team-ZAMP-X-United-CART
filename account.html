@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account — TeamZampXUnited</title>
+
+    <meta name="description" content="Manage your TeamZampXUnited profile, wishlist and orders.">
+    <meta name="author" content="TeamZampXUnited">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="noindex">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tab icon (cart emoji) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+
+<body>
+
+    <!-- Header — filled by ui.js -->
+    <div id="site-header"></div>
+
+    <div class="page">
+
+        <!-- Page title -->
+        <header class="page-header">
+            <div class="container">
+                <h1>My Account</h1>
+                <p>Manage your profile, wishlist and orders in one place.</p>
+            </div>
+        </header>
+
+        <!-- Account dashboard: sidebar + panels -->
+        <section class="container" aria-label="Account dashboard">
+            <div class="account-layout">
+
+                <!-- Sidebar — filled by account.js -->
+                <aside class="account-menu" aria-label="Account sections"></aside>
+
+                <!-- Content panels — only one panel has .active at a time -->
+                <div class="account-content">
+
+                    <!-- Profile panel -->
+                    <div class="account-panel active" id="profile" role="tabpanel" aria-label="Profile">
+                        <h2>Profile</h2>
+
+                        <div id="profilePanel">
+                            <div class="empty-state" style="padding:2rem 1rem">
+                                <div class="pxc-page-loader__spinner"
+                                    style="margin:0 auto 1rem;border-color:rgba(0,0,0,.08);border-top-color:#0a0a0a">
+                                </div>
+                                <h3>Loading profile…</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist panel -->
+                    <div class="account-panel" id="wishlist" role="tabpanel" aria-label="Wishlist">
+                        <h2>My Wishlist</h2>
+
+                        <div id="wishlistPanel">
+                            <div class="empty-state" style="padding:2rem 1rem">
+                                <div class="pxc-page-loader__spinner"
+                                    style="margin:0 auto 1rem;border-color:rgba(0,0,0,.08);border-top-color:#0a0a0a">
+                                </div>
+                                <h3>Loading wishlist…</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders panel -->
+                    <div class="account-panel" id="orders" role="tabpanel" aria-label="Orders">
+                        <h2>My Orders</h2>
+
+                        <div class="empty-state" style="padding:2rem 1rem">
+                            <div class="pxc-page-loader__spinner"
+                                style="margin:0 auto 1rem;border-color:rgba(0,0,0,.08);border-top-color:#0a0a0a"></div>
+                            <h3>Loading orders…</h3>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END account-content -->
+
+            </div>
+            <!-- END account-layout -->
+        </section>
+
+    </div>
+    <!-- END page -->
+
+    <!-- Footer — filled by ui.js -->
+    <div id="site-footer"></div>
+
+    <!-- Toast/popup host -->
+    <div id="toastHost" class="toast-host"></div>
+
+    <!-- Scripts — ORDER MATTERS, do not rearrange -->
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/account.js"></script>
+
+</body>
+
+</html>

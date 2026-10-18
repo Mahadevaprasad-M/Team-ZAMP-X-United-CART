@@ -1,0 +1,33 @@
+{
+    "name": "prasadxcart",
+    "version": "1.0.0",
+    "description": "PrasadXCart — Digital Inventory and Sales Management System",
+    "main": "server/server.js",
+    "scripts": {
+        "start": "node server/server.js",
+        "dev": "nodemon server/server.js",
+        "seed": "node server/seed.js"
+    },
+    "keywords": [
+        "inventory",
+        "sales",
+        "admin",
+        "dashboard",
+        "ecommerce"
+    ],
+    "author": "Prasad",
+    "license": "MIT",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "express": "^4.19.2",
+        "jsonwebtoken": "^9.0.2",
+        "socket.io": "^4.7.5"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}

@@ -1,0 +1,82 @@
+{
+    "hero": [
+        {
+            "title": "Mega Electronics Sale",
+            "subtitle": "Up to 40% off on smartphones, audio & more",
+            "cta": "Shop Electronics",
+            "link": "products.html?category=electronics",
+            "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1600",
+            "badge": "Limited time"
+        },
+        {
+            "title": "Fresh Groceries Delivered",
+            "subtitle": "Farm-fresh vegetables & staples at your door",
+            "cta": "Shop Groceries",
+            "link": "products.html?category=groceries",
+            "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600",
+            "badge": "Free delivery"
+        },
+        {
+            "title": "New Fashion Arrivals",
+            "subtitle": "Trendy looks starting at just ₹999",
+            "cta": "Shop Fashion",
+            "link": "products.html?category=fashion",
+            "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600",
+            "badge": "New season"
+        }
+    ],
+    "ads": [
+        {
+            "title": "Beauty Essentials",
+            "subtitle": "Flat 30% off on skincare & makeup",
+            "link": "products.html?category=beauty",
+            "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1000",
+            "accent": "#f3e5f5"
+        },
+        {
+            "title": "Home Makeover",
+            "subtitle": "Furniture & decor for every corner",
+            "link": "products.html?category=home",
+            "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1000",
+            "accent": "#fff3e0"
+        }
+    ],
+    "offer": {
+        "title": "TeamZampXUnited Big Billion Days",
+        "subtitle": "Extra 10% off with code PRASAD10 — on top of existing deals",
+        "cta": "Grab the deal",
+        "link": "products.html?sort=discount"
+    },
+    "brands": [
+        "Apple",
+        "Sony",
+        "Nike",
+        "Levi's",
+        "Zara",
+        "Mamaearth",
+        "Maybelline",
+        "Urban Ladder"
+    ],
+    "usps": [
+        {
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h11v11H3z\"/><path d=\"M14 10h4l3 3v4h-7z\"/><circle cx=\"7.5\" cy=\"19\" r=\"2\"/><circle cx=\"17.5\" cy=\"19\" r=\"2\"/><path d=\"M14 14h7\"/></svg>",
+            "title": "Free Shipping",
+            "text": "On orders above ₹499"
+        },
+        {
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12a9 9 0 1 0 3-6.7\"/><path d=\"M3 4v6h6\"/><path d=\"M12 7v5l3 2\"/></svg>",
+            "title": "Easy Returns",
+            "text": "7-day return policy"
+        },
+        {
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7l8-4Z\"/><path d=\"M9 12l2 2 4-4\"/></svg>",
+            "title": "Secure Payment",
+            "text": "100% protected checkout"
+        },
+        {
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 11.5a8.4 8.4 0 0 1-9 8.5 8.8 8.8 0 0 1-4-.9L3 21l1.9-4.7A8.4 8.4 0 0 1 3 11.5 8.5 8.5 0 1 1 21 11.5Z\"/><path d=\"M8 10h.01\"/><path d=\"M12 10h.01\"/><path d=\"M16 10h.01\"/><path d=\"M8 14h8\"/></svg>",
+            "title": "24×7 Support",
+            "text": "We're here to help"
+        }
+    ]
+}
