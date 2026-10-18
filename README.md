@@ -1,4 +1,4 @@
-# Prasad X Cart 🛒
+# TeamZampZUnited
 
 A full-stack **e-commerce web application** with a customer storefront and a
 complete **admin dashboard**. Frontend is plain HTML/CSS/JS; backend is
@@ -80,7 +80,7 @@ Node.js + Express + Socket.IO + JWT.
 ## Folder Structure
 
 ```
-prasadxcart/
+TeamZampXUnited/
 ├── *.html                     # Storefront pages
 │   ├── index.html             # Home
 │   ├── products.html          # Products listing
