@@ -14,9 +14,9 @@ Node.js + Express + Socket.IO + JWT.
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
-### 🏬 Storefront
+### Storefront
 
 | User Index | Products |
 |---|---|
@@ -30,7 +30,7 @@ Node.js + Express + Socket.IO + JWT.
 |---|---|
 | ![Login](Images/Screenshots/User%20Login%20Page.png) | ![Register](Images/Screenshots/User%20Register%20Page.png) |
 
-### 🛠️ Admin Panel
+### Admin Panel
 
 | Dashboard | Analytics | Inventory |
 |---|---|---|
@@ -42,29 +42,29 @@ Node.js + Express + Socket.IO + JWT.
 
 ---
 
-## ✨ Features
+## Features
 
 ### Customer (Storefront)
-- 🔎 Browse products by category; banner-driven home page
-- 🛒 Cart, wishlist, quantity updates (localStorage + API sync)
-- 🔐 User registration & JWT-secured login
-- 📦 Checkout & order tracking
-- ⭐ Product reviews
-- 📄 Informational pages: about, FAQ, contact, careers, press, privacy, terms, shipping, sustainability, coming-soon
+- Browse products by category; banner-driven home page
+- Cart, wishlist, quantity updates (localStorage + API sync)
+- User registration & JWT-secured login
+- Checkout & order tracking
+- Product reviews
+- Informational pages: about, FAQ, contact, careers, press, privacy, terms, shipping, sustainability, coming-soon
 
 ### Admin
-- 📊 Real-time dashboard (Socket.IO)
-- 📈 Analytics (orders, revenue, top products)
-- 📦 Inventory management (CRUD products)
-- 🧾 Orders management & status updates
-- 👥 Customers list
-- ⚠️ Alerts system
-- ⚙️ Settings (banners, categories)
-- 🔑 Separate admin auth (bcrypt + JWT)
+- Real-time dashboard (Socket.IO)
+- Analytics (orders, revenue, top products)
+- Inventory management (CRUD products)
+- Orders management & status updates
+- Customers list
+- Alerts system
+- Settings (banners, categories)
+- Separate admin auth (bcrypt + JWT)
 
 ---
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -77,7 +77,7 @@ Node.js + Express + Socket.IO + JWT.
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 prasadxcart/
@@ -242,43 +242,3 @@ prasadxcart/
 | `alert:new` | server → admin | `{ message, level }` |
 
 ---
-
-## 🖥️ Running Locally
-
-> The app is **not hosted online** — this repo is for code & file reference.
-> To try it on your machine:
-
-```bash
-git clone https://github.com/<your-username>/prasadxcart.git
-cd prasadxcart
-npm install
-npm run seed        # populate server/data/*.json (first run only)
-npm run dev         # or: npm start
-```
-
-Open:
-- Storefront → `http://localhost:3000/`
-- Admin → `http://localhost:3000/admin/login.html`
-
-**Environment (`.env`):**
-```env
-PORT=3000
-JWT_SECRET=replace_with_a_long_random_string
-NODE_ENV=development
-```
-
----
-
-## 📦 Seed Data
-
-`server/seed.js` populates `server/data/*.json` with:
-- Sample products & categories
-- Admin + demo customer
-- Banners, reviews, settings
-- Activity log entries
-
----
-
-## 📄 License
-
-MIT © 2025
